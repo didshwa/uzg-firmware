@@ -1154,6 +1154,10 @@ function MqttInputDsbl(state) {
 	$('#div_show4').toggle(this.checked);
 }
 
+function MqttSslInputDsbl(state) {
+	$("#MqttSSlCaCert").prop(disbl, state);
+}
+
 function WgInputDsbl(state) {
 	$("#WgLocalAddr").prop(disbl, state);
 	$("#WgLocalPrivKey").prop(disbl, state);

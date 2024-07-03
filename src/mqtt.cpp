@@ -6,18 +6,21 @@
 #include <FS.h>
 #include <LittleFS.h>
 #include <PubSubClient.h>
+#include <WiFiClientSecure.h>
 
 #include "config.h"
 #include "web.h"
 #include "log.h"
 #include "etc.h"
 #include "mqtt.h"
+#include "credentials.h"
 
 extern struct ConfigSettingsStruct ConfigSettings;
 extern struct zbVerStruct zbVer;
 extern struct MqttSettingsStruct MqttSettings;
 
-WiFiClient clientMqtt;
+//WiFiClient clientMqtt;
+WiFiClientSecure clientMqtt;
 
 PubSubClient clientPubSub(clientMqtt);
 
@@ -27,8 +30,21 @@ const char *haSensor = "sensor";
 const char *haButton = "button";
 const char *haBinarySensor = "binary_sensor";
 
+// Set ssl certificate
+const char* root_ca =  CA_CRT;
+const char* server_cert = SERVER_CERT;
+const char* server_key  = SERVER_KEY;
+
 void mqttConnectSetup()
 {
+    //Connecting to a mqtt broker width ssl certification
+    if(MqttSettings.ssl){
+        clientMqtt.setCACert(String(MqttSettings.ssl_caCert));
+        //clientMqtt.setCertificate(server_cert);  // for client verification
+        //clientMqtt.setPrivateKey(server_key);    // for client verification
+    }
+    
+
     clientPubSub.setServer(MqttSettings.serverIP, MqttSettings.port);
     clientPubSub.setCallback(mqttCallback);
 }

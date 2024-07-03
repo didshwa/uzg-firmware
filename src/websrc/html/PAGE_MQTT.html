@@ -30,6 +30,19 @@
                             <input data-replace="passMqtt" class='form-control' id='MqttPass' type='password' name='MqttPass'
                                 placeholder="mqttpassword">
                         </div>
+
+                        <div class='mb-2 form-check form-switch'>
+                            <input data-replace="enableMqttSsl" id="MqttSslEnable" class='form-check-input' type='checkbox'
+                                role="switch" name='MqttSslEnable' onclick="MqttSslInputDsbl(!this.checked)">
+                            <label class='form-check-label' for='MqttSslEnable'>Enable</label>
+                        </div>
+
+                        <div class='mb-2'>
+                            <label for='ssl_cacert'>Topic</label>
+                            <input data-replace="sslCaCertMqtt" class='form-control' id='MqttSslCaCert' type='text' name='MqttSslCaCert'
+                                placeholder="ca cert">
+                        </div>
+
                         <div class='mb-2'>
                             <label for='topic'>Topic</label>
                             <input data-replace="topicMqtt" class='form-control' id='MqttTopic' type='text' name='MqttTopic'

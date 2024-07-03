@@ -109,6 +109,8 @@ struct MqttSettingsStruct
   // bool retain;
   int interval;
   bool discovery;
+  bool ssl;
+  char ssl_caCert[256];
   unsigned long reconnectTime;
   unsigned long heartbeatTime;
 };
